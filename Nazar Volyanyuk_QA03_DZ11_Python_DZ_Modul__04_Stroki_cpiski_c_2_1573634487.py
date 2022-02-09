@@ -6,106 +6,58 @@
 может состоять только из трёх частей: число, операция,
 число. Возможные операции: +, -,*,/'''
 
-# user_input = '23+12'
-# numbers_1 = []
-# numbers_2 = ""
-# symbols = ["+", "-", "*", "/"]
-# for i in user_input:
-#     numbers_1.append(i)
-#     print(numbers_1)
-#     for symb in user_input:
-#         if symb == symbols:
-#             symb = symbols
-
-operations = ["+", "-", "*", "/"]
-text = "25+36"
-text = text.replace(" ", "")
-# print(text)
-
-
-for i in range(len(text)):
-    a = text[i]
-    if a in operations:
-        l = text[:i]  # left number
-        r = text[i + 1:]  # right number
-        operation = a
-print(l, r)
-if (l.isnumeric() == True) and (r.isnumeric() == True):
-    l = int(l)
-    r = int(r)
-    if operation == "+":
-        print(f"{l} + {r} = {l+r}")
-    elif operation == "-":
-        print(f"{l} - {r} = {l-r}")
-    elif operation == "*":
-        print(f"{l} * {r} = {l*r}")
-    elif operation == "/":
-        if r != 0:
-            print(f"{l} / {r} = {l/r}")
-        else:
-            print("No division by zero!")
+user_text = str(input("Введите арифметическое выражение, например 23+12. Допустимые операции + - * / : "))
+symbols = ["+", "-", "*", "/"]
+for i in range(len(user_text)):
+    a = user_text[i]
+    if a in symbols:
+        left_number = user_text[:i]
+        right_number = user_text[i + 1:]
+        symbols = a
+if (left_number.isnumeric() == True) and (right_number.isnumeric() == True):
+    left_number = int(left_number)
+    right_number = int(right_number)
+    if symbols == "+":
+        print(f"{left_number} + {right_number} = {left_number+right_number}")
+    elif symbols == "-":
+        print(f"{left_number} - {right_number} = {left_number-right_number}")
+    elif symbols == "*":
+        print(f"{left_number} * {right_number} = {left_number*right_number}")
+    elif symbols == "/":
+        print(f"{left_number} / {right_number} = {left_number/right_number}")
 else:
-    print("Incorrect input!")
+    print("Ошибка!")
 
+'''Задание 2:
+В списке целых, заполненном случайными числами,
+определить минимальный и максимальный элементы,
+посчитать количество отрицательных элементов, посчитать количество положительных элементов, посчитать
+количество нулей. Результаты вывести на экран.'''
 
-
-
-# number = '0123456789'
-# spe = '!?,.'
-# s = 'some interesting, text and else! what i am doing. how do you do? i am fine! thank you.'
-# count_number = 0
-# count_symbol = 0
-# count_spe = 0
-# count_spea = 0
-# for i in range(len(s)):
-#     print(s[i])
-#     a = s[i]
-#
-#     if a in number:
-#         count_number = count_number + 1
-#     if a in spe:
-#         count_spe = count_spe + 1
-#     if a == spe[0]:
-#         count_spea = count_spea + 1
-# print(count_symbol, count_number, count_spe,count_spea)
-
-
-
-# Пользователь вводит с клавиатуры строку. Посчитайте количество букв,
-# цифр в строке. Выведите оба
-# количества на экран.'''
-# #V1
-# letters = 'abcdefghijklmnopqrstuvwxyz'
-# numbers = '0123456789'
-# s = 'hello123'
-# count_numbers = 0
-# count_letters = 0
-# for i in range(len(s)):
-#     print(s[i])
-#     a = s[i]
-#     for l in range(len(letters)):
-#         if a == letters[l]:
-#             count_letters = count_letters + 1
-#     for n in range(len(numbers)):
-#         if a == numbers[n]:
-#             count_numbers = count_numbers + 1
-# print(count_numbers,count_letters)
-
-
-# number = '9'
-# print(number.isnumeric())
-# print(number.isalpha())
-# #GDPR
-#
-# #V2
-# s = 'hello123'
-# count_numbers = 0
-# count_letters = 0
-# for i in range(len(s)):
-#     print(s[i])
-#     a = s[i]
-#     if a.isalpha():
-#         count_letters = count_letters + 1
-#     if a.isnumeric():
-#         count_numbers = count_numbers + 1
-# print(count_numbers,count_letters)
+from random import randrange
+n = 30
+some_numbers = [randrange(-100, 100) for i in range(n)]
+count_zero = 0
+count_pozitive = 0
+count_negative = 0
+minimum = some_numbers[0]
+minimum_index = 0
+maximum = some_numbers[0]
+maximum_index = 0
+for i in some_numbers:
+    if i == 0:
+        count_zero = count_zero + 1
+    if i >= 0:
+        count_pozitive = count_pozitive + 1
+    if i < 0:
+        count_negative = count_negative + 1
+    for index in range(len(some_numbers)):
+        if minimum > some_numbers[index]:
+            minimum = some_numbers[index]
+            minimum_index = index
+        if maximum < some_numbers[index]:
+            maximum = some_numbers[index]
+            maximum_index = index
+print(f"Список случайных цифр: {some_numbers}")
+print(f"минимальное {minimum} \nмаксимальное {maximum} \nк-ство отрицательных {count_negative} "
+      f"\nк-ство положительных {count_pozitive} \nк-ство нулей {count_zero}")
